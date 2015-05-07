@@ -1,0 +1,19 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  ISBN: 1
+  Author: MyString
+  Title: MyString
+  physical: false
+  electronic: false
+  loanDate: 2015-05-07 22:52:14
+  returnDate: 2015-05-07 22:52:14
+
+two:
+  ISBN: 1
+  Author: MyString
+  Title: MyString
+  physical: false
+  electronic: false
+  loanDate: 2015-05-07 22:52:14
+  returnDate: 2015-05-07 22:52:14
