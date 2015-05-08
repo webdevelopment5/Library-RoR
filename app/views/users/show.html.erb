@@ -1,0 +1,59 @@
+<p id="notice"><%= notice %></p>
+
+<div class="panel panel-default">
+  <!-- Default panel contents -->
+  <div class="panel-heading">Users list</div>
+
+  <!-- Table -->
+  <table class="table">
+    <thead>
+          <tr>
+            <th>Name</th>
+            <th>Surname</th>
+            <!--<th>Password</th>-->
+            <th>E-mail</th>
+            <th>Role</th>
+          </tr>
+        </thead>
+        
+        <tbody>
+             <tr>
+              <td><%= @user.name %></td>
+              <td><%= @user.surname %></td>
+              <!--<td><%= @user.password %></td>-->
+              <td><%= @user.email %></td>
+              <td><%= @user.role %></td>
+            </tr>
+        </tbody>
+    
+  </table>
+</div>
+
+<!--<p>
+  <strong>Name:</strong>
+  <%= @user.name %>
+</p>
+
+<p>
+  <strong>Surname:</strong>
+  <%= @user.surname %>
+</p>
+
+<p>
+  <strong>Password:</strong>
+  <%= @user.password %>
+</p>
+
+<p>
+  <strong>E-mail:</strong>
+  <%= @user.email %>
+</p>
+
+<p>
+  <strong>Role:</strong>
+  <%= @user.role %>
+</p>
+-->
+
+<%= link_to 'Edit', edit_user_path(@user) %> |
+<%= link_to 'Back', users_path %>
