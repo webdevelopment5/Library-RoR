@@ -1,0 +1,13 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  user_id: 
+  book_id: 
+  loandate: 2015-05-08 15:53:46
+  loanreturn: 2015-05-08 15:53:46
+
+two:
+  user_id: 
+  book_id: 
+  loandate: 2015-05-08 15:53:46
+  loanreturn: 2015-05-08 15:53:46

@@ -11,7 +11,31 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150507204627) do
+ActiveRecord::Schema.define(version: 20150508210355) do
+
+  create_table "books", force: true do |t|
+    t.integer  "ISBN"
+    t.string   "Author"
+    t.string   "Title"
+    t.boolean  "physical"
+    t.boolean  "electronic"
+    t.datetime "loanDate"
+    t.datetime "returnDate"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "loans", force: true do |t|
+    t.integer  "user_id"
+    t.integer  "book_id"
+    t.datetime "loandate"
+    t.datetime "loanreturn"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "loans", ["book_id"], name: "index_loans_on_book_id"
+  add_index "loans", ["user_id"], name: "index_loans_on_user_id"
 
   create_table "users", force: true do |t|
     t.string   "email",                  default: "", null: false
@@ -27,9 +51,22 @@ ActiveRecord::Schema.define(version: 20150507204627) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "role"
+    t.string   "name"
+    t.string   "dni"
+    t.string   "surname"
   end
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true
   add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
+
+  create_table "wishes", force: true do |t|
+    t.integer  "user_id"
+    t.integer  "book_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "wishes", ["book_id"], name: "index_wishes_on_book_id"
+  add_index "wishes", ["user_id"], name: "index_wishes_on_user_id"
 
 end

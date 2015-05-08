@@ -1,0 +1,70 @@
+<h1>Listing loans</h1>
+
+<div class="panel panel-default">
+  <!-- Default panel contents -->
+  <div class="panel-heading">Loans list</div>
+<div class="table-responsive">
+  <!-- Table -->
+  <table class="table table.responsive table-hover">
+    <thead>
+           <tr>
+      <th>User</th>
+      <th>Book</th>
+      <th>LoanDate</th>
+     <th>LoanReturn</th>
+      <th colspan="3"></th>
+    </tr>
+        </thead>
+        <tbody>
+          <% @loans.each do |loan| %>
+             <tr>
+              <td><%= loan.User %></td>
+              <td><%= loan.Book %></td>
+              <td><%= loan.LoanDate %></td>
+              <td><%= loan.LoanReturn %></td>
+             
+              <td>
+                <div class="btn-toolbar">
+                  <%= link_to "Show", loan, :class => "btn btn-success" %>
+                  <%= link_to "Edit", edit_loan_path(loan), :class => "btn btn-warning" %>
+                   <%= link_to 'Destroy', loan, :class => "btn btn-primary btn-danger", method: :delete, data: { confirm: 'Are you sure?' } %>
+                </div>
+              </td>
+            </tr>
+            <% end %>
+        </tbody>
+    
+  </table>
+  </div>
+</div>
+
+
+<!--<table>
+  <thead>
+    <tr>
+      <th>User</th>
+      <th>Book</th>
+      <th>Loandate</th>
+      <th>Loanreturn</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @loans.each do |loan| %>
+      <tr>
+        <td><%= loan.user %></td>
+        <td><%= loan.book %></td>
+        <td><%= loan.loandate %></td>
+        <td><%= loan.loanreturn %></td>
+        <td><%= link_to 'Show', loan %></td>
+        <td><%= link_to 'Edit', edit_loan_path(loan) %></td>
+        <td><%= link_to 'Destroy', loan, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>-->
+
+<br>
+
+<%= link_to 'New Loan', new_loan_path, :class => "btn btn-primary btn-info" %>

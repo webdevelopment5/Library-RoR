@@ -1,5 +1,30 @@
 <p id="notice"><%= notice %></p>
 
+<div class="panel panel-default">
+  <!-- Default panel contents -->
+  <div class="panel-heading">Books list</div>
+
+  <!-- Table -->
+  <table class="table">
+    <thead>
+          <tr>
+            <th>ISBN</th>
+            <th>Author</th>
+            <th>Title</th>
+          </tr>
+        </thead>
+        
+        <tbody>
+             <tr>
+              <td><%= @book.ISBN %></td>
+              <td><%= @book.Author %></td>
+              <td><%= @book.Title %></td>
+            </tr>
+        </tbody>
+    
+  </table>
+</div>
+
 <p>
   <strong>Isbn:</strong>
   <%= @book.ISBN %>

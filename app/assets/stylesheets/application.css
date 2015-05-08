@@ -13,3 +13,25 @@
  *= require_tree .
  *= require_self
  */
+ 
+ .log-in{
+   width: 100%;
+  margin:auto;
+  text-align:center;
+  padding-top:10%;
+  font-family: 'Roboto', Arial, sans-serif;
+}
+ 
+.panel-heading{
+  background-color:#fff;
+}
+ 
+.form-control{
+  width: 90%;
+  text-align: center;
+  margin:auto;
+}
+ 
+.panel-body p{
+  color:#555;
+}
