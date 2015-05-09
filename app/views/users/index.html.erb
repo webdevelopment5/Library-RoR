@@ -1,3 +1,4 @@
+<% content_for :title, "Library app - User list" %>
 <h1>User List</h1>
 
 <div class="panel panel-default">
@@ -36,7 +37,14 @@
                 <td><%= user.surname %></td>
                 <td><%= user.email %></td>
                 <td><%= user.role %></td>
-                <td><%= link_to 'Edit', edit_user_path(user) %></td>
+                 <td>
+                <div class="btn-toolbar">
+                  <%= link_to "Show", user_path(user), :class => "btn btn-success" %>
+                  <%= link_to "Edit", edit_user_path(user), :class => "btn btn-warning" %>
+                   <%= link_to 'Destroy', user, :class => "btn btn-primary btn-danger", method: :delete, data: { confirm: 'Are you sure?' } %>
+                 
+                </div>
+              </td>
               </tr>
               <% end %>
                <% end %>
@@ -46,3 +54,10 @@
   </table>
   </div>
 </div>
+<% if @current_user == 'admin' || @current_user == 'manager' %>
+  <br>
+
+  <%= link_to 'New User', new_user_path, :class => "btn btn-primary btn-info" %>
+
+  <br>
+<% end %>
