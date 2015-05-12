@@ -12,17 +12,20 @@
       <th>Book</th>
       <th>LoanDate</th>
      <th>LoanReturn</th>
+     <th>Format</th>
       <th colspan="3"></th>
     </tr>
         </thead>
         <tbody>
           <% @loans.each do |loan| %>
+         
              <tr>
-              <td><%= loan.User %></td>
-              <td><%= loan.Book %></td>
-              <td><%= loan.LoanDate %></td>
-              <td><%= loan.LoanReturn %></td>
-             
+              <td><%= loan.user.email %></td>
+              <td><%= loan.book.Title %></td>
+              <td><%= loan.loandate %></td>
+              <td><%= loan.loanreturn %></td>
+             <td><%= loan.physical %></td>
+              <% if @current_user.role == 'admin' or @current_user.role == 'manager' %>
               <td>
                 <div class="btn-toolbar">
                   <%= link_to "Show", loan, :class => "btn btn-success" %>
@@ -30,6 +33,7 @@
                    <%= link_to 'Destroy', loan, :class => "btn btn-primary btn-danger", method: :delete, data: { confirm: 'Are you sure?' } %>
                 </div>
               </td>
+               <% end %>
             </tr>
             <% end %>
         </tbody>
@@ -68,3 +72,4 @@
 <br>
 
 <%= link_to 'New Loan', new_loan_path, :class => "btn btn-primary btn-info" %>
+

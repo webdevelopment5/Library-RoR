@@ -1,25 +1,53 @@
 Rails.application.routes.draw do
+
   resources :wishes
-  resources :loans
-  resources :books
   
-  devise_for :users, :path_prefix => 'my'
+  resources :books
+  resources :session
+ 
   resources :users
+  resources :loans
+  get 'session/new'
+
+  get 'session/create'
+
+  get 'session/destroy'
+  get "welcome/menuAdmin"
+  get "/visitors/about"
+  get "welcome" => "welcome#index", :as => "welcome"
+  get "visitors" => "visitors#index", :as => "visitors"
+  get "logout" => "session#destroy", :as => "logout"
+  get "login" => "session#new", :as => "login"
+  post "login" => "session#create"
+  get "signup" => "users#new", :as => "signup"
+  
+  if :logged_in?
+    root :to => "welcome#index"
+  else
+    root :to => "visitors#index"
+  end
+  
+ 
+   #devise_for :users, :path_prefix => 'my'
+  
+
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
-  devise_scope :user do
-    
+=begin devise_scope :user do
+   
      get "/login" => "devise/sessions#new"
     delete "/logout" => "devise/sessions#destroy"
     authenticated :user do
       root :to => 'welcome#index'
     end
     unauthenticated :user do
-      root :to => 'devise/sessions#new', as: :unauthenticated_root
+      root :to => 'visitors#index', as: :unauthenticated_root
     end
   end
   
-   get "welcome/menuAdmin"
+=end
+  
+
   # You can have the root of your site routed with "root"
   #root :to => redirect('registrations/new')
 

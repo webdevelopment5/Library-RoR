@@ -1,10 +1,16 @@
 class LoansController < ApplicationController
   before_action :set_loan, only: [:show, :edit, :update, :destroy]
-
+  before_filter :authenticate_user!
   respond_to :html
 
   def index
+    @current_user = current_user
+    if @current_user.role == 'reader'
+      @loans = Loan.where(@loan.user => @current_user.id)
+    else
     @loans = Loan.all
+  end
+    
     respond_with(@loans)
   end
 
@@ -13,17 +19,27 @@ class LoansController < ApplicationController
   end
 
   def new
+    
+    @books = Book.all
     @loan = Loan.new
-    respond_with(@loan)
+    @users = User.where(:role => "reader")
+    
+    
   end
 
   def edit
   end
 
   def create
-    @loan = Loan.new(loan_params)
+    @wloan = Loan.new(loan_params)
+=begin
+@loan.user = User.find(params[:user_id])
+    @wish.book = Book.find(params[:book_id])
+    @loan.physical = params[:physical]
+    @loan.loandate = params[:loandate]
+    @loan.loanreturn = params[:loanreturn]
     @loan.save
-    respond_with(@loan)
+=end
   end
 
   def update
@@ -42,6 +58,6 @@ class LoansController < ApplicationController
     end
 
     def loan_params
-      params.require(:loan).permit(:user_id, :book_id, :loandate, :loanreturn)
+      params.require(:loan).permit(:user_id, :book_id, :physical, :loandate , :loanreturn)
     end
 end

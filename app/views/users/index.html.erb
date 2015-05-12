@@ -9,6 +9,7 @@
   <table class="table table.responsive table-hover">
     <thead>
            <tr>
+               <th>Id</th>
       <th>Name</th>
       <th>Surname</th>
       <th>E-mail</th>
@@ -33,6 +34,7 @@
             <% else%>
              <% @users.each do |user| %>
                <tr>
+                    <td><%= user.id %></td>
                 <td><%= user.name %></td>
                 <td><%= user.surname %></td>
                 <td><%= user.email %></td>

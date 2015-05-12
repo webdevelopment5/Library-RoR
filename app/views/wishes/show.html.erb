@@ -2,12 +2,12 @@
 
 <p>
   <strong>User:</strong>
-  <%= @wish.user %>
+  <%= @wish.user.name %>
 </p>
 
 <p>
   <strong>Book:</strong>
-  <%= @wish.book %>
+  <%= @wish.book.Title %>
 </p>
 
 <%= link_to 'Edit', edit_wish_path(@wish) %> |

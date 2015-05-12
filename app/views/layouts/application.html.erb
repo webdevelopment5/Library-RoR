@@ -39,7 +39,7 @@
   </head>
   <body>
 
-    <div class="navbar navbar-inverse navbar-static-top">
+    <div class="navbar navbar-inverse navbar-fixed-top">
       <div class="container">
         <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-responsive-collapse">
           <span class="icon-bar"></span>
@@ -49,9 +49,10 @@
         <a class="navbar-brand" href='/' >Home</a>
         <div class="navbar-collapse collapse navbar-responsive-collapse">
           <ul class="nav navbar-nav">
-            <li><%= link_to "Help", "/"  %></li>
+            
           </ul>
           <ul class="nav navbar-nav navbar-right">
+            <li><a href="/visitors/about">About</a></li>
             <li><%= render 'devise/menu/login_items' %></li>
           </ul>
         </div>

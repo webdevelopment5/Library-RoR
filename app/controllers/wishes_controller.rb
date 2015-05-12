@@ -1,14 +1,18 @@
+
 class WishesController < ApplicationController
   before_action :set_wish, only: [:show, :edit, :update, :destroy]
-
+  before_filter :authenticate_user!
   respond_to :html
 
   def index
-    @wishes = Wish.all
-    respond_with(@wishes)
+
+      @wishes = Wish.where( :user => current_user.id)
+      @current_user = current_user
+      respond_with(@wishes)
   end
 
   def show
+    
     respond_with(@wish)
   end
 
@@ -21,9 +25,23 @@ class WishesController < ApplicationController
   end
 
   def create
-    @wish = Wish.new(wish_params)
-    @wish.save
-    respond_with(@wish)
+    @current_user = params[:user_id] 
+    @wish = Wish.new
+    @wish.user = User.find(params[:user_id])
+    @wish.book = Book.find(params[:book_id])
+    
+     respond_to do |format|
+      if @wish.save
+       
+        format.html { redirect_to books_path, notice: 'Book added to your wish list' }
+      else
+        format.html { redirect_to books_path, alert: 'Book already in your wish list' }
+      end
+  end
+    
+    
+  
+    
   end
 
   def update
@@ -33,7 +51,7 @@ class WishesController < ApplicationController
 
   def destroy
     @wish.destroy
-    respond_with(@wish)
+    redirect_to wishes_path
   end
 
   private

@@ -6,6 +6,7 @@ class BooksController < ApplicationController
   def index
     
     @books = Book.all
+    @current_user = current_user
     respond_with(@books)
   end
 
@@ -36,6 +37,8 @@ class BooksController < ApplicationController
     @book.destroy
     respond_with(@book)
   end
+  
+  
 
   private
     def set_book

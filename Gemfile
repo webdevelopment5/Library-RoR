@@ -31,6 +31,8 @@ gem 'spring',        group: :development
 gem 'devise'
 gem 'twitter-bootstrap-rails'
 gem 'bootstrap-sass'
+gem 'bootstrap-social-rails'
+gem 'composite_primary_keys', '=7.0.11'
 # Use unicorn as the app server
 # gem 'unicorn'
 

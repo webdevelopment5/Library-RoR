@@ -1,5 +1,8 @@
 class UsersController < ApplicationController
+
+   before_filter :management_user!
    before_action :set_user, only: [:show, :edit, :update, :destroy]
+   
      respond_to :html
 =begin
   def create
@@ -70,6 +73,6 @@ class UsersController < ApplicationController
       @user = User.find(params[:id])
     end
     def user_params
-      params.require(:user).permit(:name, :email, :surname, :role, :password, :dni)
+      params.require(:user).permit(:name, :email, :surname, :role,:password, :dni)
     end
 end

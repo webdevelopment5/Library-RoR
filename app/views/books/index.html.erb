@@ -3,56 +3,108 @@
 <div class="panel panel-default">
   <!-- Default panel contents -->
   <div class="panel-heading">Books list</div>
-<div class="table-responsive">
-  <!-- Table -->
-  <table class="table table.responsive table-hover">
-    <thead>
-           <tr>
-      <th>Isbn</th>
-      <th>Author</th>
-      <th>Title</th>
-     <th>Physical</th>
-     <th>Electronic</th>
-     <!--  <th>Loandate</th>
+  <div class="table-responsive">
+    <!-- Table -->
+    <table class="table table.responsive table-hover">
+      <thead>
+        <tr>
+          <th>Isbn</th>
+          <th>Author</th>
+          <th>Title</th>
+          <th>Format</th>
+          <th>Loaned</th>
+
+          <!--  <th>Loandate</th>
       <th>Returndate</th>-->
-      <th colspan="3"></th>
-    </tr>
-        </thead>
-        <tbody>
-          <% @books.each do |book| %>
-             <tr>
-              <td><%= book.ISBN %></td>
-              <td><%= book.Author %></td>
-              <td><%= book.Title %></td>
-              <% if book.physical? %>
-                <td>Yes</td>
-              <% else %>
-                <td>No</td>
-              <% end %>
-              <% if book.electronic? %>
-                <td>Yes</td>
-              <% else %>
-                <td>No</td>
-              <% end %>
+          <th colspan="3"></th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @books.each do |book| %>
+          <tr>
+            <% if book.physical? %>
               <td>
-                <div class="btn-toolbar">
-                  <%= link_to "Show", book, :class => "btn btn-success" %>
-                  <%= link_to "Edit", edit_book_path(book), :class => "btn btn-warning" %>
-                   <%= link_to 'Destroy', book, :class => "btn btn-primary btn-danger", method: :delete, data: { confirm: 'Are you sure?' } %>
-                </div>
+                <%=book.ISBN %>
               </td>
-            </tr>
-            <% end %>
-        </tbody>
-    
-  </table>
+              <td>
+                <%=book.Author %>
+              </td>
+              <td>
+                <%=book.Title %>
+              </td>
+              <td>Physical book</td>
+
+              <% if @current_user.role=='manager' or @current_user.role=='admin' %>
+              <td></td>
+                <td>
+                  <div class="btn-toolbar">
+                    <%=link_to "Show", book, :class=> "btn btn-success" %>
+                      <%=link_to "Edit", edit_book_path(book), :class=> "btn btn-warning" %>
+                        <%=link_to 'Destroy', book, :class=> "btn btn-primary btn-danger", method: :delete, data: { confirm: 'Are you sure?' } %>
+                          <%=link_to 'Loan', {:controller=> "loans", :action => "create",:user_id => 11, :book_id=> 2, :physical => true, :loandate => Time.now , :loanreturn => Time.now} , :class=> "btn btn-primary", :method=>:get %>
+                  </div>
+                </td>
+                <% elsif @current_user.role=='reader' %>
+                <td></td>
+                  <td>
+                    <div class="btn-toolbar">
+                      <%=link_to 'Add to wish list', {:controller=> "wishes", :action => "create", :user_id => @current_user, :book_id=> book} , :class=> "btn btn-primary", :method=>:post %>
+
+
+                    </div>
+                  </td>
+                  <%end%>
+          </tr>
+          <% end %>
+            <!-- end physical-->
+            <% if book.electronic? %>
+
+              <td>
+                <%=book.ISBN %>
+              </td>
+              <td>
+                <%=book.Author %>
+              </td>
+              <td>
+                <%=book.Title %>
+              </td>
+              <td>Electronic book</td>
+
+              <% if @current_user.role=='manager' or @current_user.role=='admin' %>
+              <td></td>
+                <td>
+                  <div class="btn-toolbar">
+                    <%=link_to "Show", book, :class=> "btn btn-success" %>
+                      <%=link_to "Edit", edit_book_path(book), :class=> "btn btn-warning" %>
+                        <%=link_to 'Destroy', book, :class=> "btn btn-primary btn-danger", method: :delete, data: { confirm: 'Are you sure?' } %>
+                          <%=link_to 'Loan', {:controller=> "loans", :action => "new", :book_id=> book, :physical => false} ,  :class=> "btn btn-primary", :method=>:get %>
+                  </div>
+                </td>
+                <% elsif @current_user.role=='reader' %>
+                 <td></td>
+                  <td>
+                    <div class="btn-toolbar">
+                      <%=link_to 'Add to wish list', {:controller=> "wishes", :action => "create", :user_id => @current_user, :book_id=> book} , :class=> "btn btn-primary" ,:method=>:post %>
+
+
+                    </div>
+                  </td>
+                  <%end%>
+                    </tr>
+                    <% end %>
+                      <!-- end electronic-->
+                      <% end %> 
+      </tbody>
+
+    </table>
   </div>
 </div>
 
 
+<% if @current_user.role=='manager' or @current_user.role=='admin' %>
+  <br>
 
-<br>
+  <%=link_to 'New Book', new_book_path, :class=> "btn btn-primary btn-info" %>
 
-<%= link_to 'New Book', new_book_path, :class => "btn btn-primary btn-info" %>
-
-<br>
+    <br>
+    <% end %>

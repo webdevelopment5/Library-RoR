@@ -1,7 +1,9 @@
+
+
 <%= form_for(@loan) do |f| %>
   <% if @loan.errors.any? %>
     <div id="error_explanation">
-      <h2><%= pluralize(@loan.errors.count, "error") %> prohibited this loan from being saved:</h2>
+      <h2><%= pluralize(@loan.errors.count, "error") %> prohibited this book from being saved:</h2>
 
       <ul>
       <% @loan.errors.full_messages.each do |message| %>
@@ -10,24 +12,17 @@
       </ul>
     </div>
   <% end %>
+  
 
   <div class="field">
-    <%= f.label :user_id %><br>
-    <%= f.text_field :user_id %>
+ <%= f.select :user, @users.collect{ |c| [c.name, c]}%>
+ <%= f.select :book_id, @books.collect{ |b| [b.Title, b.id]} %>
   </div>
   <div class="field">
-    <%= f.label :book_id %><br>
-    <%= f.text_field :book_id %>
-  </div>
-  <div class="field">
-    <%= f.label :loandate %><br>
-    <%= f.datetime_select :loandate %>
-  </div>
-  <div class="field">
-    <%= f.label :loanreturn %><br>
-    <%= f.datetime_select :loanreturn %>
-  </div>
-  <div class="actions">
-    <%= f.submit %>
-  </div>
+    <%= f.label "Physical" %> <br />
+    <%= f.check_box :physical %> <br />
+</div>
+  
+  
+  <div class="actions"><%= f.submit 'Add', class: "btn btn-lg btn-primary" %></div>
 <% end %>

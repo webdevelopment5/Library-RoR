@@ -5,6 +5,8 @@ class CreateWishes < ActiveRecord::Migration
       t.references :book, index: true
 
       t.timestamps
+     
     end
   end
+   
 end
